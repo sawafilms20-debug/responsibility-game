@@ -45,7 +45,7 @@ export default function VideoScreen({ onSkip, onBack }) {
         <div style={styles.videoContainer}>
           <video
             ref={videoRef}
-            src="/video.mp4"
+            src="https://drive.google.com/uc?export=download&id=1G7kwbM8p35rzKD-k3yOwfwKaudUBResJ"
             style={styles.video}
             controls
             playsInline
