@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { playClick } from "../utils/sounds";
+
+function useIsMobile(breakpoint = 600) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const pageVariants = {
   initial: { opacity: 0, scale: 0.95 },
@@ -14,6 +24,8 @@ const cardVariants = {
 };
 
 export default function VideoScreen({ onSkip, onBack }) {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
       className="video-screen"
@@ -22,9 +34,15 @@ export default function VideoScreen({ onSkip, onBack }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={styles.wrapper}
+      style={{
+        ...styles.wrapper,
+        ...(isMobile ? { padding: 0, alignItems: "stretch" } : {}),
+      }}
     >
-      <motion.div variants={cardVariants} initial="initial" animate="animate" style={styles.card}>
+      <motion.div variants={cardVariants} initial="initial" animate="animate" style={{
+        ...styles.card,
+        ...(isMobile ? { borderRadius: 0, border: "none", padding: "1rem", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" } : {}),
+      }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.8rem" }}>
           <h2 style={{ ...styles.heading, marginBottom: 0 }}>فيديو المسؤولية</h2>
           {onBack && (
