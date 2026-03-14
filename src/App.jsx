@@ -6,6 +6,9 @@ import { AchievementsProvider } from './contexts/AchievementsContext'
 import AchievementPopup from './components/AchievementPopup'
 import MainLanding from './components/MainLanding'
 import ValuesPage from './components/ValuesPage'
+import LessonsPage from './components/LessonsPage'
+import ActivitiesPage from './components/ActivitiesPage'
+import EventsPage from './components/EventsPage'
 import LandingPage from './components/LandingPage'
 import VideoScreen from './components/VideoScreen'
 import ActivityWrapper from './components/ActivityWrapper'
@@ -29,8 +32,13 @@ function AppInner() {
   const handleMainNavigate = useCallback((sectionId) => {
     if (sectionId === 'values') {
       setScreen('values')
+    } else if (sectionId === 'lessons') {
+      setScreen('lessons')
+    } else if (sectionId === 'activities') {
+      setScreen('activities')
+    } else if (sectionId === 'events') {
+      setScreen('events')
     }
-    // Other sections can be added later
   }, [])
 
   const handleSelectValue = useCallback((valueId) => {
@@ -118,6 +126,15 @@ function AppInner() {
         )}
         {screen === 'values' && (
           <ValuesPage key="values" onSelectValue={handleSelectValue} onBack={handleBackToMain} />
+        )}
+        {screen === 'lessons' && (
+          <LessonsPage key="lessons" onBack={handleBackToMain} />
+        )}
+        {screen === 'activities' && (
+          <ActivitiesPage key="activities" onBack={handleBackToMain} />
+        )}
+        {screen === 'events' && (
+          <EventsPage key="events" onBack={handleBackToMain} />
         )}
         {screen === 'gameLanding' && (
           <LandingPage key="gameLanding" onStart={handleStart} onBack={() => setScreen('values')} />
