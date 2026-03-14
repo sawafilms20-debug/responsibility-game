@@ -1,8 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGame } from "../../contexts/GameContext";
 import { playCorrect, playWrong, playSend, playSelect } from "../../utils/sounds";
 import ConfettiExplosion from "../../components/ConfettiExplosion";
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 export default function MCQActivity({ data, onComplete, activityIcon }) {
   const game = useGame();
@@ -77,6 +86,7 @@ export default function MCQActivity({ data, onComplete, activityIcon }) {
   };
 
   const currentQuestion = questions[currentQ];
+  const shuffledOptions = useMemo(() => shuffleArray(currentQuestion.options), [currentQ]);
 
   return (
     <div style={styles.phoneFrame} dir="rtl">
@@ -181,7 +191,7 @@ export default function MCQActivity({ data, onComplete, activityIcon }) {
               transition={{ delay: 0.3 }}
             >
               <p style={styles.replyPrompt}>اختاري ردّك</p>
-              {currentQuestion.options.map((opt, i) => (
+              {shuffledOptions.map((opt, i) => (
                 <motion.button
                   key={opt.id}
                   style={styles.replyOption}

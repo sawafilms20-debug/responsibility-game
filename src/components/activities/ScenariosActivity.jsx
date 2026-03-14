@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playCorrect, playWrong, playSwipe, playClick } from '../../utils/sounds';
 import { useGame } from '../../contexts/GameContext';
@@ -43,6 +43,15 @@ const pageVariants = {
   },
 };
 
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 const ScenariosActivity = ({ data, onComplete, activityIcon }) => {
   const game = useGame();
   const { scenarios } = data;
@@ -59,6 +68,7 @@ const ScenariosActivity = ({ data, onComplete, activityIcon }) => {
   const [confettiTrigger, setConfettiTrigger] = useState(0);
 
   const current = scenarios[currentIndex];
+  const shuffledOptions = useMemo(() => shuffleArray(current.options), [currentIndex]);
 
   const handleSelect = useCallback(
     (option) => {
@@ -283,7 +293,7 @@ const ScenariosActivity = ({ data, onComplete, activityIcon }) => {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.4 }}
                 >
-                  {current.options.map((option, idx) => {
+                  {shuffledOptions.map((option, idx) => {
                     const isSelected = selectedId === option.id;
                     const isCorrectOption = option.correct;
                     let bubbleStyle = styles.thoughtBubble;

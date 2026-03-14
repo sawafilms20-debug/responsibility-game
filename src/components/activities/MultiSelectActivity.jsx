@@ -147,8 +147,18 @@ const RadarChart = ({ levels, completed }) => {
   );
 };
 
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 const MultiSelectActivity = ({ data, onComplete, activityIcon }) => {
-  const { question, hint, options } = data;
+  const { question, hint, options: rawOptions } = data;
+  const options = useMemo(() => shuffleArray(rawOptions), []);
   const game = useGame();
 
   const [optionStates, setOptionStates] = useState({});

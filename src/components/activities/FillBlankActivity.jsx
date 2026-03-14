@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playCorrect, playWrong, playReveal, playClick } from '../../utils/sounds';
 import { useGame } from '../../contexts/GameContext';
@@ -10,6 +10,15 @@ const PARCHMENT = '#f5e6c8';
 const PARCHMENT_LIGHT = '#faf3e0';
 const INK = '#3d2b1f';
 const INK_LIGHT = '#5c4033';
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 const FillBlankActivity = ({ data, onComplete, activityIcon }) => {
   const game = useGame();
@@ -27,7 +36,8 @@ const FillBlankActivity = ({ data, onComplete, activityIcon }) => {
   const blankRef = useRef(null);
 
   const verse = data?.verse || '';
-  const options = data?.options || [];
+  const rawOptions = data?.options || [];
+  const options = useMemo(() => shuffleArray(rawOptions), []);
   const explanation = data?.explanation || '';
 
   const correctOption = options.find((o) => o.correct);
