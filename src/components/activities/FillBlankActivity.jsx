@@ -89,16 +89,14 @@ const FillBlankActivity = ({ data, onComplete, activityIcon }) => {
 
       setTimeout(() => setShakingId(null), 600);
 
-      // If all wrong options exhausted, auto-reveal
-      if (remainingWrong.length <= 1) {
-        setTimeout(() => {
-          setFilledOptionId(correctOption?.id);
-          setIsCorrect(true);
-          setShowExplanation(true);
-          setCompleted(true);
-          onComplete?.(0);
-        }, 1000);
-      }
+      // Wrong answer — show correct answer and move on
+      setTimeout(() => {
+        setFilledOptionId(correctOption?.id);
+        setIsCorrect(true);
+        setShowExplanation(true);
+        setCompleted(true);
+        onComplete?.(0);
+      }, 1000);
     }
   };
 

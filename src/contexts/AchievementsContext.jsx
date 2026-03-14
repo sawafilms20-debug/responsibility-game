@@ -11,7 +11,7 @@ const BADGE_DEFS = {
   scholar: { emoji: "🎓", title: "عالم المسؤولية!", desc: "أكملت جميع الأنشطة" },
   collector: { emoji: "⭐", title: "جامع النجوم!", desc: "جمعت ٥٠٠ نقطة" },
   superCollector: { emoji: "🌟", title: "نجم ساطع!", desc: "جمعت ١٠٠٠ نقطة" },
-  comeback: { emoji: "💪", title: "عودة قوية!", desc: "أجبت صحيحاً بعد خطأين متتاليين" },
+  comeback: { emoji: "⭐", title: "عودة قوية!", desc: "أجبت صحيحاً بعد خطأين متتاليين" },
   perfectStreak: { emoji: "👑", title: "الملك!", desc: "حققت سلسلة من ١٠ إجابات صحيحة" },
 };
 

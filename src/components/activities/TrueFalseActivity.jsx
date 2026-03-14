@@ -75,7 +75,7 @@ const TrueFalseActivity = ({ data, onComplete, activityIcon }) => {
         style={styles.resultContainer}
       >
         <div style={styles.resultEmoji}>
-          {pct >= 80 ? '📰' : pct >= 50 ? '👍' : '💪'}
+          {pct >= 80 ? '📰' : pct >= 50 ? '👍' : '📝'}
         </div>
         <h2 style={styles.resultTitle}>
           {pct >= 80 ? 'محررة متميزة!' : pct >= 50 ? 'عمل جيد !' : 'حاولي مرة أخرى!'}

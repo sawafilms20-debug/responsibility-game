@@ -322,7 +322,7 @@ export default function OrderingActivity({ data, onComplete, activityIcon }) {
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ duration: 1, repeat: 2 }}
             >
-              {correctCount >= totalSteps - 1 ? "🌟" : correctCount >= 3 ? "👍" : "💪"}
+              {correctCount >= totalSteps - 1 ? "🌟" : correctCount >= 3 ? "👍" : "📝"}
             </motion.span>
             <h3 style={styles.summaryTitle}>
               {correctCount >= totalSteps - 1
