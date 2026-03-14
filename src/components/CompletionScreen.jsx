@@ -173,16 +173,6 @@ export default function CompletionScreen({
           >
             أعيدي اللعبة
           </motion.button>
-          {onHome && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onHome}
-              style={styles.homeButton}
-            >
-              الصفحة الرئيسية
-            </motion.button>
-          )}
         </motion.div>
       </motion.div>
     </motion.div>
