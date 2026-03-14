@@ -256,7 +256,7 @@ export default function ActivityWrapper({
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "flex-start",
-        minHeight: isMobile ? 70 : 100,
+        minHeight: isMobile ? 120 : 100,
         marginBottom: 0,
       }}>
         {/* Small speech bubble on the right next to character */}
@@ -272,7 +272,7 @@ export default function ActivityWrapper({
             boxShadow: "0 2px 10px rgba(139,21,56,0.08)",
             lineHeight: 1.6,
             maxWidth: isMobile ? "55%" : "50%",
-            marginRight: isMobile ? 90 : 170,
+            marginRight: isMobile ? 180 : 170,
             marginBottom: isMobile ? 8 : 12,
           }}
           initial={{ opacity: 0, y: 10 }}
@@ -287,13 +287,13 @@ export default function ActivityWrapper({
           src={CHARACTER_IMAGES[characterState]}
           alt="الشخصية"
           style={{
-            width: isMobile ? 120 : 210,
-            height: isMobile ? 120 : 210,
+            width: isMobile ? 240 : 210,
+            height: isMobile ? 240 : 210,
             objectFit: "contain",
             flexShrink: 0,
             position: "absolute",
-            right: isMobile ? 0 : 8,
-            bottom: isMobile ? -45 : -65,
+            right: isMobile ? -10 : 8,
+            bottom: isMobile ? -90 : -65,
             zIndex: 0,
           }}
           initial={{ scale: 0.8, opacity: 0 }}
@@ -408,9 +408,11 @@ export default function ActivityWrapper({
 const styles = {
   pageBg: {
     minHeight: "100vh",
+    height: "100vh",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
+    overflow: "hidden",
   },
   outerWrapper: {
     direction: "rtl",
@@ -421,6 +423,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 0,
+    height: "100%",
   },
 
   /* ── top bar ── */
@@ -563,10 +566,12 @@ const styles = {
   /* ── content ── */
   contentArea: {
     position: "relative",
-    overflow: "hidden",
+    overflow: "auto",
     borderRadius: 16,
     backgroundColor: "#fff",
     boxShadow: "0 2px 16px rgba(139,21,56,0.06)",
+    flex: 1,
+    minHeight: 0,
   },
   motionPage: {
     width: "100%",
