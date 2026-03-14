@@ -195,11 +195,11 @@ export default function ActivityWrapper({
   return (
     <div style={{
       ...styles.pageBg,
-      backgroundImage: `linear-gradient(rgba(253,242,244,0.55), rgba(255,255,255,0.6)), url(${ACTIVITY_BACKGROUNDS[activity?.id] || "/images/backgrounds/bg_hallway.png"})`,
+      ...(isMobile ? { backgroundImage: 'none', backgroundColor: '#fdf2f4' } : { backgroundImage: `linear-gradient(rgba(253,242,244,0.55), rgba(255,255,255,0.6)), url(${ACTIVITY_BACKGROUNDS[activity?.id] || "/images/backgrounds/bg_hallway.png"})` }),
     }} dir="rtl">
-    <div style={styles.outerWrapper}>
+    <div style={{ ...styles.outerWrapper, ...(isMobile ? { padding: 0, maxWidth: '100%' } : {}) }}>
       {/* ──────────── TOP BAR ──────────── */}
-      <div style={{ ...styles.topBar, padding: isMobile ? "0.5rem 0.6rem" : "0.75rem 1rem", flexWrap: "wrap", gap: isMobile ? 6 : 0 }}>
+      <div style={{ ...styles.topBar, padding: isMobile ? "0.4rem 0.5rem" : "0.75rem 1rem", flexWrap: "wrap", gap: isMobile ? 6 : 0, ...(isMobile ? { borderRadius: 0 } : {}) }}>
         <div style={styles.topBarRight}>
           <motion.span
             style={{ ...styles.badge, fontSize: isMobile ? "0.75rem" : "0.85rem", padding: isMobile ? "0.25rem 0.6rem" : "0.35rem 0.9rem" }}
@@ -304,7 +304,7 @@ export default function ActivityWrapper({
       </div>
 
       {/* ──────────── MAIN CONTENT AREA ──────────── */}
-      <div style={{ ...styles.contentArea, position: "relative", zIndex: 1 }}>
+      <div style={{ ...styles.contentArea, position: "relative", zIndex: 1, ...(isMobile ? { borderRadius: 0, boxShadow: 'none' } : {}) }}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activity?.id ?? currentIndex}
