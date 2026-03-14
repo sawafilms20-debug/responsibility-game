@@ -1,0 +1,133 @@
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { playClick } from "../utils/sounds";
+
+const pageVariants = {
+  initial: { opacity: 0, scale: 0.95 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, scale: 1.05, transition: { duration: 0.4 } },
+};
+
+const cardVariants = {
+  initial: { opacity: 0, y: 50 },
+  animate: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.6, ease: "easeOut" } },
+};
+
+export default function VideoScreen({ onSkip, onBack }) {
+  const videoRef = useRef(null);
+  const [ended, setEnded] = useState(false);
+
+  const handleEnded = () => {
+    setEnded(true);
+    setTimeout(() => onSkip?.(), 1500);
+  };
+
+  return (
+    <motion.div
+      className="video-screen"
+      dir="rtl"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={styles.wrapper}
+    >
+      <motion.div variants={cardVariants} initial="initial" animate="animate" style={styles.card}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.8rem" }}>
+          <h2 style={{ ...styles.heading, marginBottom: 0 }}>فيديو المسؤولية</h2>
+          {onBack && (
+            <button onClick={() => { playClick(); onBack(); }} style={styles.backBtn}>
+              الرجوع →
+            </button>
+          )}
+        </div>
+
+        <div style={styles.videoContainer}>
+          <video
+            ref={videoRef}
+            src="/video.mp4"
+            style={styles.video}
+            controls
+            playsInline
+            onEnded={handleEnded}
+          />
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => { playClick(); onSkip?.(); }}
+          style={styles.skipButton}
+        >
+          {ended ? "التالي" : "تخطي الفيديو"}
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const styles = {
+  wrapper: {
+    minHeight: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "1.5rem",
+    fontFamily: "'Cairo', 'Tajawal', sans-serif",
+    backgroundImage: "linear-gradient(rgba(253,242,244,0.5), rgba(255,255,255,0.55)), url(/images/backgrounds/bg_classroom.jpg)",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  card: {
+    background: "rgba(255,255,255,0.95)",
+    borderRadius: 20,
+    padding: "1.5rem",
+    maxWidth: 800,
+    width: "100%",
+    textAlign: "center",
+    boxShadow: "0 8px 40px rgba(139,21,56,0.12)",
+    border: "2px solid #f3e5f5",
+  },
+  heading: {
+    fontSize: "1.3rem",
+    color: "#8B1538",
+    marginTop: 0,
+    marginBottom: "1rem",
+    fontWeight: 700,
+  },
+  backBtn: {
+    background: "#f3f4f6",
+    border: "none",
+    borderRadius: 10,
+    padding: "0.4rem 0.8rem",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "#8B1538",
+    cursor: "pointer",
+    fontFamily: "inherit",
+  },
+  videoContainer: {
+    borderRadius: 14,
+    overflow: "hidden",
+    marginBottom: "1.2rem",
+    backgroundColor: "#000",
+  },
+  video: {
+    width: "100%",
+    display: "block",
+    borderRadius: 14,
+    outline: "none",
+  },
+  skipButton: {
+    background: "#8B1538",
+    color: "#fff",
+    border: "none",
+    borderRadius: 14,
+    padding: "0.75rem 2rem",
+    fontSize: "1rem",
+    fontWeight: 600,
+    cursor: "pointer",
+    fontFamily: "inherit",
+    boxShadow: "0 4px 16px rgba(139,21,56,0.3)",
+  },
+};
