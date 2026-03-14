@@ -567,6 +567,7 @@ const styles = {
   contentArea: {
     position: "relative",
     overflow: "auto",
+    WebkitOverflowScrolling: "touch",
     borderRadius: 16,
     backgroundColor: "#fff",
     boxShadow: "0 2px 16px rgba(139,21,56,0.06)",

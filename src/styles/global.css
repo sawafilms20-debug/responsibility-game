@@ -1673,28 +1673,20 @@ ul, ol {
 
 @media (max-width: 768px) {
   .activity-character {
-    width: 70vw;
-    height: 70vw;
-    max-width: 320px;
-    max-height: 320px;
+    width: 120px;
+    height: 120px;
   }
   .activity-character--large {
-    width: 75vw;
-    height: 75vw;
-    max-width: 340px;
-    max-height: 340px;
+    width: 140px;
+    height: 140px;
   }
   .activity-character--small {
-    width: 50vw;
-    height: 50vw;
-    max-width: 220px;
-    max-height: 220px;
+    width: 80px;
+    height: 80px;
   }
   .activity-character--scene {
-    width: 80vw;
-    height: 80vw;
-    max-width: 380px;
-    max-height: 380px;
+    width: 160px;
+    height: 160px;
   }
 }
 
