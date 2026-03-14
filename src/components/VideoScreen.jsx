@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { playClick } from "../utils/sounds";
 
@@ -14,14 +14,6 @@ const cardVariants = {
 };
 
 export default function VideoScreen({ onSkip, onBack }) {
-  const videoRef = useRef(null);
-  const [ended, setEnded] = useState(false);
-
-  const handleEnded = () => {
-    setEnded(true);
-    setTimeout(() => onSkip?.(), 1500);
-  };
-
   return (
     <motion.div
       className="video-screen"
@@ -43,13 +35,12 @@ export default function VideoScreen({ onSkip, onBack }) {
         </div>
 
         <div style={styles.videoContainer}>
-          <video
-            ref={videoRef}
-            src="https://drive.google.com/uc?export=download&id=1G7kwbM8p35rzKD-k3yOwfwKaudUBResJ"
-            style={styles.video}
-            controls
-            playsInline
-            onEnded={handleEnded}
+          <iframe
+            src="https://drive.google.com/file/d/1G7kwbM8p35rzKD-k3yOwfwKaudUBResJ/preview"
+            style={styles.iframe}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            frameBorder="0"
           />
         </div>
 
@@ -59,7 +50,7 @@ export default function VideoScreen({ onSkip, onBack }) {
           onClick={() => { playClick(); onSkip?.(); }}
           style={styles.skipButton}
         >
-          {ended ? "التالي" : "تخطي الفيديو"}
+          تخطي الفيديو
         </motion.button>
       </motion.div>
     </motion.div>
@@ -111,12 +102,17 @@ const styles = {
     overflow: "hidden",
     marginBottom: "1.2rem",
     backgroundColor: "#000",
+    position: "relative",
+    paddingTop: "56.25%", // 16:9 aspect ratio
   },
-  video: {
+  iframe: {
+    position: "absolute",
+    top: 0,
+    left: 0,
     width: "100%",
-    display: "block",
+    height: "100%",
+    border: "none",
     borderRadius: 14,
-    outline: "none",
   },
   skipButton: {
     background: "#8B1538",
