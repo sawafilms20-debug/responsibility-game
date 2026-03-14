@@ -421,7 +421,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 0,
-    minHeight: "100vh",
   },
 
   /* ── top bar ── */
@@ -563,17 +562,14 @@ const styles = {
 
   /* ── content ── */
   contentArea: {
-    flex: 1,
     position: "relative",
     overflow: "hidden",
     borderRadius: 16,
     backgroundColor: "#fff",
     boxShadow: "0 2px 16px rgba(139,21,56,0.06)",
-    minHeight: 340,
   },
   motionPage: {
     width: "100%",
-    minHeight: 280,
     padding: "0.75rem",
     boxSizing: "border-box",
   },
