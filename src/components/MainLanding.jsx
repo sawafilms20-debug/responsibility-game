@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.1, delayChildren: 0.15 },
