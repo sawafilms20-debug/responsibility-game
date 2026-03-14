@@ -56,8 +56,10 @@ export default function VideoScreen({ onSkip, onBack }) {
           <iframe
             src="https://drive.google.com/file/d/1G7kwbM8p35rzKD-k3yOwfwKaudUBResJ/preview"
             style={styles.iframe}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
+            allow="autoplay; encrypted-media; fullscreen"
+            allowFullScreen={true}
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true"
             frameBorder="0"
           />
         </div>
