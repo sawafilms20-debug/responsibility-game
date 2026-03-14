@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { gameData } from './data/gameData'
 import { GameProvider, useGame } from './contexts/GameContext'
@@ -16,40 +17,57 @@ import NameEntryScreen from './components/NameEntryScreen'
 import CompletionScreen from './components/CompletionScreen'
 
 /*
-  Screen flow:
-  mainLanding → values → gameLanding → video → activity → nameEntry → complete
+  URL routes:
+  /                    → MainLanding (4 section cards)
+  /القيم               → ValuesPage (choose a value)
+  /القيم/المسؤولية     → Game flow (landing → video → activities → name → complete)
+  /الدروس             → LessonsPage
+  /الأنشطة            → ActivitiesPage
+  /الفعاليات           → EventsPage
 */
 
-function AppInner() {
-  const [screen, setScreen] = useState('mainLanding')
+function MainLandingRoute() {
+  const navigate = useNavigate()
+  const handleNavigate = useCallback((sectionId) => {
+    if (sectionId === 'values') navigate('/القيم')
+    else if (sectionId === 'lessons') navigate('/الدروس')
+    else if (sectionId === 'activities') navigate('/الأنشطة')
+    else if (sectionId === 'events') navigate('/الفعاليات')
+  }, [navigate])
+  return <MainLanding onNavigate={handleNavigate} />
+}
+
+function ValuesRoute() {
+  const navigate = useNavigate()
+  const handleSelectValue = useCallback((valueId) => {
+    if (valueId === 'responsibility') navigate('/القيم/المسؤولية')
+  }, [navigate])
+  return <ValuesPage onSelectValue={handleSelectValue} onBack={() => navigate('/')} />
+}
+
+function LessonsRoute() {
+  const navigate = useNavigate()
+  return <LessonsPage onBack={() => navigate('/')} />
+}
+
+function ActivitiesRoute() {
+  const navigate = useNavigate()
+  return <ActivitiesPage onBack={() => navigate('/')} />
+}
+
+function EventsRoute() {
+  const navigate = useNavigate()
+  return <EventsPage onBack={() => navigate('/')} />
+}
+
+function GameFlowRoute() {
+  const navigate = useNavigate()
+  const [screen, setScreen] = useState('gameLanding')
   const [currentActivity, setCurrentActivity] = useState(0)
   const [scores, setScores] = useState({})
   const [stars, setStars] = useState(0)
   const [studentName, setStudentName] = useState('')
   const game = useGame()
-
-  /* ── Navigation handlers ── */
-  const handleMainNavigate = useCallback((sectionId) => {
-    if (sectionId === 'values') {
-      setScreen('values')
-    } else if (sectionId === 'lessons') {
-      setScreen('lessons')
-    } else if (sectionId === 'activities') {
-      setScreen('activities')
-    } else if (sectionId === 'events') {
-      setScreen('events')
-    }
-  }, [])
-
-  const handleSelectValue = useCallback((valueId) => {
-    if (valueId === 'responsibility') {
-      setScreen('gameLanding')
-    }
-  }, [])
-
-  const handleBackToMain = useCallback(() => {
-    setScreen('mainLanding')
-  }, [])
 
   const handleStart = useCallback(() => {
     setScreen('video')
@@ -110,80 +128,74 @@ function AppInner() {
   }, [game])
 
   const handleHome = useCallback(() => {
-    setScreen('mainLanding')
+    navigate('/')
     setCurrentActivity(0)
     setScores({})
     setStars(0)
     setStudentName('')
     game.resetGame()
-  }, [game])
+  }, [game, navigate])
 
   return (
-    <div className="app">
-      <AnimatePresence mode="wait">
-        {screen === 'mainLanding' && (
-          <MainLanding key="mainLanding" onNavigate={handleMainNavigate} />
-        )}
-        {screen === 'values' && (
-          <ValuesPage key="values" onSelectValue={handleSelectValue} onBack={handleBackToMain} />
-        )}
-        {screen === 'lessons' && (
-          <LessonsPage key="lessons" onBack={handleBackToMain} />
-        )}
-        {screen === 'activities' && (
-          <ActivitiesPage key="activities" onBack={handleBackToMain} />
-        )}
-        {screen === 'events' && (
-          <EventsPage key="events" onBack={handleBackToMain} />
-        )}
-        {screen === 'gameLanding' && (
-          <LandingPage key="gameLanding" onStart={handleStart} onBack={() => setScreen('values')} />
-        )}
-        {screen === 'video' && (
-          <VideoScreen key="video" onSkip={handleSkipVideo} onBack={() => setScreen('gameLanding')} />
-        )}
-        {screen === 'activity' && (
-          <ActivityWrapper
-            key={`activity-${currentActivity}`}
-            activity={gameData.activities[currentActivity]}
-            currentIndex={currentActivity}
-            totalActivities={gameData.activities.length}
-            scores={scores}
-            stars={stars}
-            onComplete={handleActivityComplete}
-            onNext={handleNext}
-            onPrev={handlePrev}
-            onGoTo={handleGoToActivity}
-            onBack={() => setScreen('gameLanding')}
-          />
-        )}
-        {screen === 'nameEntry' && (
-          <NameEntryScreen key="nameEntry" onSubmit={handleNameSubmit} onBack={() => setScreen('activity')} />
-        )}
-        {screen === 'complete' && (
-          <CompletionScreen
-            key="complete"
-            scores={scores}
-            stars={stars}
-            totalActivities={gameData.activities.length}
-            studentName={studentName}
-            onRestart={handleRestart}
-            onHome={handleHome}
-          />
-        )}
-      </AnimatePresence>
-    </div>
+    <AnimatePresence mode="wait">
+      {screen === 'gameLanding' && (
+        <LandingPage key="gameLanding" onStart={handleStart} onBack={() => navigate('/القيم')} />
+      )}
+      {screen === 'video' && (
+        <VideoScreen key="video" onSkip={handleSkipVideo} onBack={() => setScreen('gameLanding')} />
+      )}
+      {screen === 'activity' && (
+        <ActivityWrapper
+          key={`activity-${currentActivity}`}
+          activity={gameData.activities[currentActivity]}
+          currentIndex={currentActivity}
+          totalActivities={gameData.activities.length}
+          scores={scores}
+          stars={stars}
+          onComplete={handleActivityComplete}
+          onNext={handleNext}
+          onPrev={handlePrev}
+          onGoTo={handleGoToActivity}
+          onBack={() => setScreen('gameLanding')}
+        />
+      )}
+      {screen === 'nameEntry' && (
+        <NameEntryScreen key="nameEntry" onSubmit={handleNameSubmit} onBack={() => setScreen('activity')} />
+      )}
+      {screen === 'complete' && (
+        <CompletionScreen
+          key="complete"
+          scores={scores}
+          stars={stars}
+          totalActivities={gameData.activities.length}
+          studentName={studentName}
+          onRestart={handleRestart}
+          onHome={handleHome}
+        />
+      )}
+    </AnimatePresence>
   )
 }
 
 function App() {
   return (
-    <GameProvider>
-      <AchievementsProvider>
-        <AppInner />
-        <AchievementPopup />
-      </AchievementsProvider>
-    </GameProvider>
+    <BrowserRouter>
+      <GameProvider>
+        <AchievementsProvider>
+          <div className="app">
+            <Routes>
+              <Route path="/" element={<MainLandingRoute />} />
+              <Route path="/القيم" element={<ValuesRoute />} />
+              <Route path="/القيم/المسؤولية" element={<GameFlowRoute />} />
+              <Route path="/الدروس" element={<LessonsRoute />} />
+              <Route path="/الأنشطة" element={<ActivitiesRoute />} />
+              <Route path="/الفعاليات" element={<EventsRoute />} />
+            </Routes>
+          </div>
+          <AchievementPopup />
+        </AchievementsProvider>
+      </GameProvider>
+    </BrowserRouter>
   )
 }
 
