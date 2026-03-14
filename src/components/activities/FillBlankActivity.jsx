@@ -116,7 +116,7 @@ const FillBlankActivity = ({ data, onComplete, activityIcon }) => {
         transition={{ duration: 0.6 }}
       >
         {activityIcon ? (
-          <img src={activityIcon} alt="" style={{ width: 140, height: 140, objectFit: "contain" }} />
+          <img src={activityIcon} alt="" style={{ width: 280, height: 280, objectFit: "contain" }} />
         ) : (
           <span style={styles.scrollEmoji}>{'\u{1F4DC}'}</span>
         )}

@@ -96,7 +96,7 @@ export default function MCQActivity({ data, onComplete, activityIcon }) {
         {/* Activity icon */}
         {activityIcon && (
           <div style={{ display: "flex", justifyContent: "center", margin: "0.25rem 0" }}>
-            <img src={activityIcon} alt="" style={{ width: 90, height: 90, objectFit: "contain" }} />
+            <img src={activityIcon} alt="" style={{ width: 180, height: 180, objectFit: "contain" }} />
           </div>
         )}
 

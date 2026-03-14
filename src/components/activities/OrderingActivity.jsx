@@ -140,7 +140,7 @@ export default function OrderingActivity({ data, onComplete, activityIcon }) {
       {/* Scene header */}
       <div style={styles.sceneHeader}>
         {activityIcon ? (
-          <img src={activityIcon} alt="" style={{ width: 140, height: 140, objectFit: "contain" }} />
+          <img src={activityIcon} alt="" style={{ width: 280, height: 280, objectFit: "contain" }} />
         ) : (
           <span style={styles.sceneEmoji}>🎬</span>
         )}

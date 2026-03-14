@@ -102,7 +102,7 @@ const TrueFalseActivity = ({ data, onComplete, activityIcon }) => {
       {/* Desk header */}
       <div style={styles.deskHeader}>
         {activityIcon ? (
-          <img src={activityIcon} alt="" style={{ width: 140, height: 140, objectFit: "contain" }} />
+          <img src={activityIcon} alt="" style={{ width: 280, height: 280, objectFit: "contain" }} />
         ) : (
           <span style={styles.deskIcon}>📰</span>
         )}

@@ -106,7 +106,7 @@ const MatchingActivity = ({ data, onComplete, activityIcon }) => {
       {/* Activity icon */}
       {activityIcon && (
         <div style={{ display: "flex", justifyContent: "center", margin: "0.5rem 0" }}>
-          <img src={activityIcon} alt="" style={{ width: 150, height: 150, objectFit: "contain" }} />
+          <img src={activityIcon} alt="" style={{ width: 300, height: 300, objectFit: "contain" }} />
         </div>
       )}
       {/* App header bar */}

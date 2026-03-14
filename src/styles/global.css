@@ -1657,17 +1657,17 @@ ul, ol {
 
 @media (max-width: 768px) {
   .landing-character {
-    width: 90vw;
-    height: 90vw;
-    max-width: 520px;
-    max-height: 520px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 400px;
+    max-height: 400px;
   }
 }
 
 @media (max-width: 480px) {
   .landing-character {
-    width: 95vw;
-    height: 95vw;
+    width: 65vw;
+    height: 65vw;
   }
 }
 
