@@ -111,6 +111,9 @@ export default function OrderingActivity({ data, onComplete, activityIcon }) {
       game.resetStreak();
       startTypewriter(`❌ ليس تماماً. التصرف الصحيح هو: "${sorted[currentStep].text}"`);
     }
+
+    // Auto-advance after showing feedback
+    setTimeout(() => handleNext(), 2500);
   };
 
   const handleNext = () => {
@@ -288,22 +291,7 @@ export default function OrderingActivity({ data, onComplete, activityIcon }) {
               )}
             </AnimatePresence>
 
-            {/* Next button */}
-            <AnimatePresence>
-              {answered && (
-                <motion.button
-                  style={styles.nextBtn}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleNext}
-                >
-                  {currentStep < totalSteps - 1 ? "المرحلة التالية ▶" : "عرض النتيجة ✨"}
-                </motion.button>
-              )}
-            </AnimatePresence>
+            {/* Auto-advances after answer */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -1646,6 +1646,31 @@ ul, ol {
   }
 }
 
+/* ---------- Landing Page Character ---------- */
+.landing-character {
+  width: 520px;
+  height: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .landing-character {
+    width: 90vw;
+    height: 90vw;
+    max-width: 520px;
+    max-height: 520px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-character {
+    width: 95vw;
+    height: 95vw;
+  }
+}
+
 /* ---------- Print ---------- */
 @media print {
   .nav-buttons,

@@ -77,8 +77,20 @@ const ClassifyActivity = ({ data, onComplete, activityIcon }) => {
       setWrongCount((prev) => prev + 1);
       setShaking(selectedItem.id);
       setTimeout(() => {
+        // Auto-place in correct category and move on
+        const correctCat = selectedItem.category;
+        const newPlaced = { ...placed, [selectedItem.id]: correctCat };
+        setPlaced(newPlaced);
         setShaking(null);
         setSelectedItem(null);
+
+        // Check if all items placed
+        const allPlaced = items.every((i) => newPlaced[i.id]);
+        if (allPlaced && !completedRef.current) {
+          completedRef.current = true;
+          setDone(true);
+          setTimeout(() => onComplete(correctCount / items.length), 1500);
+        }
       }, 600);
     }
   };

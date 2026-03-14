@@ -79,13 +79,23 @@ const MatchingActivity = ({ data, onComplete, activityIcon }) => {
         setTimeout(() => onComplete(Object.keys(newMatched).length / pairs.length), 1500);
       }
     } else {
-      // Wrong match
+      // Wrong match - auto-match the correct pair and move on
       playWrong();
       game.resetStreak();
       setShaking(pairId);
       setTimeout(() => {
+        // Match the selected hashtag with its correct post
+        const newMatched = { ...matched, [selectedHashtag]: true };
+        setMatched(newMatched);
         setShaking(null);
         setSelectedHashtag(null);
+
+        // Check completion
+        if (Object.keys(newMatched).length === pairs.length) {
+          completedRef.current = true;
+          setDone(true);
+          setTimeout(() => onComplete(Object.keys(newMatched).filter(id => matched[id]).length / pairs.length), 1500);
+        }
       }, 600);
     }
   };

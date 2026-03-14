@@ -101,7 +101,7 @@ export default function LandingPage({ onStart, onBack }) {
           <motion.img
             src="/images/characters/maryam_waving.png"
             alt="الشخصية"
-            style={styles.characterImg}
+            className="landing-character"
             animate={floatAnimation}
             onError={(e) => { e.target.style.display = 'none'; }}
           />
