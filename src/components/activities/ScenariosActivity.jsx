@@ -228,7 +228,8 @@ const ScenariosActivity = ({ data, onComplete, activityIcon }) => {
               <motion.img
                 src={activityIcon}
                 alt=""
-                style={{ ...styles.sceneCharacter, width: 400, height: 400 }}
+                className="activity-character--scene"
+                style={{ filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.3))', zIndex: 2 }}
                 initial={{ scale: 0.7, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 15, delay: 0.2 }}
@@ -237,7 +238,8 @@ const ScenariosActivity = ({ data, onComplete, activityIcon }) => {
               <motion.img
                 src="/images/characters/maryam_thinking.png"
                 alt=""
-                style={styles.sceneCharacter}
+                className="activity-character--scene"
+                style={{ filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.3))', zIndex: 2 }}
                 initial={{ scale: 0.7, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 15, delay: 0.2 }}

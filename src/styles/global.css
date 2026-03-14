@@ -1646,6 +1646,58 @@ ul, ol {
   }
 }
 
+/* ---------- Activity Character Icon ---------- */
+.activity-character {
+  width: 280px;
+  height: 280px;
+  object-fit: contain;
+}
+
+.activity-character--large {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.activity-character--small {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.activity-character--scene {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .activity-character {
+    width: 70vw;
+    height: 70vw;
+    max-width: 320px;
+    max-height: 320px;
+  }
+  .activity-character--large {
+    width: 75vw;
+    height: 75vw;
+    max-width: 340px;
+    max-height: 340px;
+  }
+  .activity-character--small {
+    width: 50vw;
+    height: 50vw;
+    max-width: 220px;
+    max-height: 220px;
+  }
+  .activity-character--scene {
+    width: 80vw;
+    height: 80vw;
+    max-width: 380px;
+    max-height: 380px;
+  }
+}
+
 /* ---------- Landing Page Character ---------- */
 .landing-character {
   width: 520px;

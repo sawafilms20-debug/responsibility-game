@@ -235,7 +235,7 @@ const MultiSelectActivity = ({ data, onComplete, activityIcon }) => {
         transition={{ duration: 0.5 }}
       >
         {activityIcon ? (
-          <img src={activityIcon} alt="" style={{ width: 280, height: 280, objectFit: "contain" }} />
+          <img src={activityIcon} alt="" className="activity-character" />
         ) : (
           <span style={{ fontSize: 22 }}>📊</span>
         )}
